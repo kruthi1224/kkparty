@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Board</title>
+   <style>
+   body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.chessboard {
+    display: grid;
+    grid-template-columns: repeat(8, 80px);
+    grid-template-rows: repeat(8, 80px);
+    border: 10px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.chessboard div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    font-family: Arial, sans-serif;
+}
+
+.white {
+    background-color: #f0d9b5;
+}
+
+.black {
+    background-color: #b58863;
+    color: white;
+}
+</style>
+</head>
+<body>
+<div class="chessboard">
+    <script>
+        const pieces = {
+            0: "♜♞♝♛♚♝♞♜",
+            1: "♟♟♟♟♟♟♟♟",
+            6: "♙♙♙♙♙♙♙♙",
+            7: "♖♘♗♕♔♗♘♖"
+        };
+
+        for (let row = 0; row < 8; row++) {
+            for (let col = 0; col < 8; col++) {
+                const square = document.createElement("div");
+                square.className = (row + col) % 2 === 0 ? "white" : "black";
+                if (pieces[row]) {
+                    square.textContent = pieces[row][col];
+                }
+                document.querySelector(".chessboard").appendChild(square);
+            }
+        }
+    </script>
+</div>
+</body>
+</html>
