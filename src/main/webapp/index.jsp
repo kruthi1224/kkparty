@@ -3,113 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Chess Game</title>
+    <title>Chess Board</title>
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f0f0f0;
             margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .chessboard {
+            display: grid;
+            grid-template-columns: repeat(8, 80px);
+            grid-template-rows: repeat(8, 80px);
+            border: 10px solid black;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+        }
+
+        .chessboard div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 48px;
             font-family: Arial, sans-serif;
         }
-        .welcome-container {
-            text-align: center;
-            background-color: #fff;
-            padding: 50px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        .white {
+            background-color: #f0d9b5;
         }
-        .welcome-container h1 {
-            margin-bottom: 20px;
+
+        .black {
+            background-color: #b58863;
+            color: white;
         }
-        .welcome-container button {
+
+        .start-button {
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
-            border: none;
-            border-radius: 5px;
             background-color: #4CAF50;
             color: white;
-        }
-        .welcome-container button:hover {
-            background-color: #45a049;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
 <body>
-    <div class="welcome-container">
-        <h1>Welcome to the Chess Game</h1>
-        <button onclick="location.href='chessboard.html'">Start Game</button>
-    </div>
-</body>
-</html>
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chess Board</title>
-   <style>
-   body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
-}
-
-.chessboard {
-    display: grid;
-    grid-template-columns: repeat(8, 80px);
-    grid-template-rows: repeat(8, 80px);
-    border: 10px solid black;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-.chessboard div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 48px;
-    font-family: Arial, sans-serif;
-}
-
-.white {
-    background-color: #f0d9b5;
-}
-
-.black {
-    background-color: #b58863;
-    color: white;
-}
-</style>
-</head>
-<body>
-<div class="chessboard">
+    <h1>Let's Start the Game</h1>
+    <button class="start-button" onclick="startGame()">Start</button>
+    <div class="chessboard" id="chessboard"></div>
     <script>
-        const pieces = {
-            0: "♜♞♝♛♚♝♞♜",
-            1: "♟♟♟♟♟♟♟♟",
-            6: "♙♙♙♙♙♙♙♙",
-            7: "♖♘♗♕♔♗♘♖"
-        };
+        function startGame() {
+            const pieces = {
+                0: "♜♞♝♛♚♝♞♜",
+                1: "♟♟♟♟♟♟♟♟",
+                6: "♙♙♙♙♙♙♙♙",
+                7: "♖♘♗♕♔♗♘♖"
+            };
 
-        for (let row = 0; row < 8; row++) {
-            for (let col = 0; col < 8; col++) {
-                const square = document.createElement("div");
-                square.className = (row + col) % 2 === 0 ? "white" : "black";
-                if (pieces[row]) {
-                    square.textContent = pieces[row][col];
+            const chessboard = document.getElementById("chessboard");
+            chessboard.innerHTML = ""; // Clear the board
+
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const square = document.createElement("div");
+                    square.className = (row + col) % 2 === 0 ? "white" : "black";
+                    if (pieces[row]) {
+                        square.textContent = pieces[row][col];
+                    }
+                    chessboard.appendChild(square);
                 }
-                document.querySelector(".chessboard").appendChild(square);
             }
         }
     </script>
-</div>
 </body>
 </html>
